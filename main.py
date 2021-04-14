@@ -1,7 +1,7 @@
 class Student:
-    lector1 = []
-    lector2 = []
-    lector_name = []
+    grades_lector_python = []
+    grades_lector_git = []
+
 
     def __init__(self, name, surname, gender):
         self.name = name
@@ -16,33 +16,25 @@ class Student:
 
     def rate_lector(self, lector, course, grade):
         lector.lecture_scores += grade
-        if Reviewer.courses_attacheds[0] == course:
-            Student.lector1 += grade
-        else:
-            Student.lector2 += grade
+
+        if course in 'Python':
+            Student.grades_lector_python += grade
+        elif course in 'Git':
+            Student.grades_lector_git += grade
+
         if course in lector.gradess:
             lector.gradess[course] += grade
         else:
             lector.gradess[course] = grade
 
-    def average_all_lector(lector1, lector2):
-        average_phyton = 0
-        average_git = 0
-        counter1 = 0
-        counter2 = 0
-        sum_of_ratings2 = 0
-        sum_of_ratings3 = 0
-        for val in lector1:
-            sum_of_ratings2 += val
-            counter1 += 1
-            average_phyton = sum_of_ratings2 / counter1
+    def average_all_lector(lector_python, lector_git):
+
+        average_phyton = sum(lector_python) / len(lector_python)
         print(F'Средняя оценка за курс у лекторов по "Phyton": {average_phyton}')
         print()
 
-        for val in lector2:
-            sum_of_ratings3 += val
-            counter2 += 1
-            average_git = sum_of_ratings3 / counter2
+        average_git = sum(lector_git) / len(lector_git)
+
         print(F'Средняя оценка за курс у лекторов по "Git": {average_git}')
         print()
 
@@ -99,37 +91,29 @@ class Reviewer(Mentor):
     courses_grades = []
     curse_phyton = []
     curse_git = []
+    grades_all_phyton = []
+    grades_all_git = []
 
     def rate_hw(self, student, course, grade):
         student.gradess += grade
-        if Reviewer.courses_attacheds[0] == course:
-            Reviewer.curse_phyton += grade
-        else:
-            Reviewer.curse_git += grade
+
+        if course in 'Python':
+            Reviewer.grades_all_phyton += grade
+        elif course in 'Git':
+            Reviewer.grades_all_git += grade
+
         if course in student.grades_student:
             student.grades_student[course] += grade
         else:
             student.grades_student[course] = grade
 
     def average_all_curs(phyton, git):
-        average_phyton = 0
-        average_git = 0
-        counter1 = 0
-        counter2 = 0
-        sum_of_ratings_reviewer_phyton = 0
-        sum_of_ratings_reviewer_git = 0
 
-        for val in phyton:
-            sum_of_ratings_reviewer_phyton += val
-            counter1 += 1
-            average_phyton = sum_of_ratings_reviewer_phyton / counter1
+        average_phyton = sum(phyton) / len(phyton)
         print(F'Средняя оценка на курсе у учеников по "Phyton": {average_phyton}')
         print()
 
-        for val in git:
-            sum_of_ratings_reviewer_git += val
-            counter2 += 1
-            average_git = sum_of_ratings_reviewer_git / counter2
+        average_git = sum(git) / len(git)
         print(F'Средняя оценка на курсе у учеников по "Git": {average_git}')
         print()
 
@@ -156,13 +140,11 @@ some_mentor2.rate_hw(some_student2, 'Python', [10, 10, 9, 10, 10])
 some_mentor2.rate_hw(some_student2, 'Git', [10, 10, 10, 10, 10])
 
 some_lector1 = Lecturer('Pavel', 'Shatilov')
-Student.lector_name += [some_lector1.name]
 some_lector1.curs += ['Python', 'Git']
 some_student2.rate_lector(some_lector1, 'Python', [10, 1, 9, 10, 10])
 some_student1.rate_lector(some_lector1, 'Git', [10, 9, 10, 6, 10])
 
 some_lector2 = Lecturer('Some', 'Buddy')
-Student.lector_name += [some_lector2.name]
 some_lector2.curs += ['Python', 'Git']
 some_student2.rate_lector(some_lector2, 'Python', [10, 10, 9, 10, 10, 10])
 some_student2.rate_lector(some_lector2, 'Git', [10, 5, 10, 6, 5])
@@ -190,6 +172,6 @@ print()
 print(some_lector1 < some_lector2)
 print()
 
-Reviewer.average_all_curs(Reviewer.curse_phyton, Reviewer.curse_git)
+Reviewer.average_all_curs(Reviewer.grades_all_phyton, Reviewer.grades_all_git)
 
-Student.average_all_lector(Student.lector1, Student.lector2)
+Student.average_all_lector(Student.grades_lector_python, Student.grades_lector_git)
