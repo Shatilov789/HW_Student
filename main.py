@@ -33,7 +33,6 @@ class Student:
         print()
 
         average_git = sum(lector_git) / len(lector_git)
-
         print(F'Средняя оценка за курс у лекторов по "Git": {average_git}')
         print()
 
@@ -147,6 +146,12 @@ some_lector2 = Lecturer('Some', 'Buddy')
 some_lector2.curs += ['Python', 'Git']
 some_student2.rate_lector(some_lector2, 'Python', [10, 10, 9, 10, 10, 10])
 some_student2.rate_lector(some_lector2, 'Git', [10, 5, 10, 6, 5])
+
+print(some_mentor1)
+print()
+
+print(some_mentor2)
+print()
 
 some_student1.socer_student(some_student1.gradess)
 print(some_student1)
