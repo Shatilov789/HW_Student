@@ -2,7 +2,6 @@ class Student:
     grades_lector_python = []
     grades_lector_git = []
 
-
     def __init__(self, name, surname, gender):
         self.name = name
         self.surname = surname
@@ -45,7 +44,10 @@ class Student:
             self.average_rating = self.sum_of_ratings / self.number_of_ratings
 
     def __str__(self):
-        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {round(self.average_rating, 1)}\nЗавершенные курсы: {self.finished_courses[0]}\nКурсы в процессе изучения: {self.courses_in_progress[0]}, {self.courses_in_progress[1]}'
+        return f'Имя: {self.name}\nФамилия: {self.surname}\n' \
+               f'Средняя оценка за домашние задания: {round(self.average_rating, 1)}\n' \
+               f'Завершенные курсы: {self.finished_courses[0]}\n' \
+               f'Курсы в процессе изучения: {self.courses_in_progress[0]}, {self.courses_in_progress[1]}'
 
     def __gt__(self, other):
         if self.average_rating > other.average_rating:
@@ -59,7 +61,6 @@ class Mentor:
         self.name = name
         self.surname = surname
         self.courses_attached = []
-
 
 class Lecturer(Mentor):
     lecture_scores = []
@@ -77,14 +78,14 @@ class Lecturer(Mentor):
 
     def __str__(self):
 
-        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {round(self.average_rating, 1)} '
+        return f'Имя: {self.name}\nФамилия: {self.surname}\n' \
+               f'Средняя оценка за лекции: {round(self.average_rating, 1)}'
 
     def __gt__(self, other):
         if self.average_rating > other.average_rating:
             return f'Лучший лектор: {self.name} с рейтингом: {round(other.average_rating, 1)}'
         else:
             return f'Лучший лектор: {other.name} с рейтингом: {round(other.average_rating, 1)}'
-
 
 class Reviewer(Mentor):
     courses_attacheds = []
@@ -96,12 +97,10 @@ class Reviewer(Mentor):
 
     def rate_hw(self, student, course, grade):
         student.gradess += grade
-
         if course in 'Python':
             Reviewer.grades_all_phyton += grade
         elif course in 'Git':
             Reviewer.grades_all_git += grade
-
         if course in student.grades_student:
             student.grades_student[course] += grade
         else:
